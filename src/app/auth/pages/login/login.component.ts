@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit{
   loading:boolean = false;
 
   miFormulario: FormGroup = this.fb.group({
-    code: ['212100', [Validators.required,Validators.minLength(6)]],
-    password: ['string=123A',[Validators.required,Validators.minLength(6)]
+    code: ['', [Validators.required,Validators.minLength(6)]],
+    password: ['',[Validators.required,Validators.minLength(6)]
   ]
 
   });
