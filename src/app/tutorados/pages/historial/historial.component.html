@@ -1,0 +1,66 @@
+<app-home></app-home>
+<div class="vista" style="position: relative; z-index: 0;">
+  <div class="text-center">
+    <h1>Historial de sesiones de tutoría</h1>
+  </div>
+
+  <div *ngIf="tutorado">
+    <app-datos-tutorados-historial [Tutorado]="tutorado"></app-datos-tutorados-historial>
+  </div>
+  <br>
+  <p-dropdown [options]="semestres" 
+              [(ngModel)]="semestreSeleccionado"
+              (ngModelChange)="onSemestreChange($event)" 
+              optionLabel="denominacionSemestre"
+              [style]="{ 'text-align': 'center','background-color': '#E3B02E','width':'100%','font-weight': 'bold' }"
+              [placeholder]="placeholderDropdown"> 
+  </p-dropdown>
+
+  
+  <div class="dimension-title">
+    <h3 style="font-weight: bold">Actividad de sesión de tutoría</h3>
+  </div>
+
+  <div *ngIf="semestreSeleccionado">
+    <p-table *ngIf="detallesMostrados.length; else noDataTemplate" 
+            [scrollable]="true"
+            scrollHeight="300px" 
+            [value]="detallesMostrados"
+            styleClass="p-datatable-gridlines" 
+            [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="background-color:#DFEAF4;">Fecha</th>
+          <th style="background-color:#DFEAF4;">Dimensión</th>
+          <th style="background-color:#DFEAF4;">Descripción de actividad</th>
+          <th style="background-color:#DFEAF4;">Recomendaciones</th>
+        </tr>
+      </ng-template>
+      <ng-template  pTemplate="body" let-detalle>
+        <tr >
+          <td>{{ detalle.fecha }}</td>
+          <td>{{ detalle.dimension }}</td>
+          <td>{{ detalle.descripcion }}</td>
+          <td>{{ detalle.referencia }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <br>
+    <div style="display: flex; justify-content: flex-start; ">
+      <button pButton pRipple                   
+              icon="pi pi-arrow-left"
+              iconPos="left"
+              [style]="{ 'background-color': '#E3B02E', 'border': 'none','color': 'black'}"
+              (click)="retroceder()"
+              >
+      </button>
+    </div>
+    
+  </div>
+  <ng-template #noDataTemplate>
+    <div class="text-center">
+      <p class="bg-yellow-200">No hay registros para mostrar.</p>
+    </div>
+  </ng-template>
+</div>
+<p-toast></p-toast>

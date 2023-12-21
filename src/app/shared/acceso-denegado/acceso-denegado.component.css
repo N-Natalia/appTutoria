@@ -1,0 +1,13 @@
+.access-denied-header {
+    background-color: #f44336;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  .access-denied-header i {
+    font-size: 2rem;
+    margin-right: 1rem;
+  }
+  

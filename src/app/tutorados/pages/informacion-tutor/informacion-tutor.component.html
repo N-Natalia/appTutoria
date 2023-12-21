@@ -1,0 +1,44 @@
+<app-home ></app-home>
+<div class="vista" style="position: relative; z-index: 0;">
+    <div class="text-center">
+        <h1>Mi tutor</h1>
+    </div>
+    <div class="flex flex-wrap" >
+        
+        <!-- Left -->
+        <div class="card mr-5" style="flex: 1;">        
+            <div *ngIf="tutor">
+                <h2 class="flex justify-content-center text-black-alpha-70">Información del tutor:</h2>
+                <div style="display: flex;">
+                    <div class="data-fields-header" style="flex: 1; background-color: #E3B02E;">
+                        <strong style="justify-content: center;">Campos </strong>
+                    </div>
+                    <div class="data-fields-header" style="flex: 1;background-color: #E3B02E ;">
+                        <strong style="justify-content: center;">Datos del tutor</strong>
+                    </div>
+                </div>
+                <app-fila-data [label]="labels[0]" [value]="tutor.nombres" ></app-fila-data>
+                <app-fila-data [label]="labels[1]" [value]="valueApellido" ></app-fila-data>
+                <app-fila-data [label]="labels[2]" [value]="tutor.email" ></app-fila-data>
+                <app-fila-data [label]="labels[3]" [value]="tutor.nroCelular" ></app-fila-data>
+            </div>        
+        </div>
+
+        <!-- Right -->
+        <div class="card" style="flex: 2;">
+            <h2 class="flex justify-content-center text-black-alpha-70">Horarios disponibles:</h2>
+            
+            <app-tabla-horario></app-tabla-horario>
+            
+        </div>
+        
+    </div>
+
+    <div style="display: flex; justify-content: flex-end; ">
+        <p-button label="Ok" iconPos="right" class="custom-button"
+            [style]="{ 'background-color': '#E3B02E', 'border': 'none', 'color': 'black', 'margin-top':'9px' }" routerLink="/tutorados/reservaVoluntaria">
+        </p-button>
+    </div>
+
+</div>
+

@@ -1,0 +1,115 @@
+<app-home></app-home>
+<div class="vista" style="position: relative; z-index: 0;">
+
+    <div class="text-center">
+        <h1>Nueva sesión de tutoria obligatoria</h1>
+    </div>
+    <ng-container *ngIf="!ProgramacionActiva">
+        <h4 class="m-0 pl-2 py-1 text-black-alpha-70" style="background: #99bbdcdf;">Complete aspectos generales de la sesión de tutoría:</h4>
+
+        <form [formGroup]="formSesionTutoriaObligatoria"
+            (ngSubmit)="guardar()">
+        
+            <div class="flex flex-wrap" style="background: #DFEAF4;">
+                <!-- LEFT -->    
+                <div style="flex: 1;" class="columnInput"> 
+                    <div *ngIf="semestre">
+                        <div class="flex justify-content-start align-items-center">
+                            <div style="flex: 1;">
+                                <label for="inputField" style="width: 20%;">Semestre:</label>
+                            </div>
+                
+                            <div style="flex: 2;">
+                                <input type="text" pInputText 
+                                    style="width: 80%;"
+                                    [placeholder]="semestre.denominacionSemestre"
+                                    disabled="true">
+                                
+                            </div>           
+                            
+                        </div>
+
+                    </div>           
+                    
+                    
+                    <br>
+            
+                    <div class="flex justify-content-start align-items-center">
+                        <div style="flex: 1;">
+                            <label for="inputField" style="width: 20%;">Tipo de reunión:</label>
+                        </div>
+                        <div style="flex: 2; "  >
+                            <p-dropdown id="selectedTipoReunion" 
+                                        type="selectedTipoReunion" 
+                                        name="selectedTipoReunion" 
+                                        formControlName="selectedTipoReunion" 
+                                        [options]="tiposReunion"
+                                        optionLabel="name" 
+                                        [style]="{'width': '80%'}">
+                            </p-dropdown>
+                        </div>
+                    </div>
+            
+                    
+                                
+                </div>
+
+            
+                <!-- RIGTH -->
+                <div style="flex: 1;" class="columnInput">
+                    
+                    <div class="flex justify-content-start align-items-center">
+                        <div style="flex: 1;">
+                            <label for="inputField" style="width: 25%;">Fecha inicio:</label>
+                        </div>
+                        <div style="flex: 2;">
+                            <p-calendar id="fechaInicio" 
+                                type="fecha" 
+                                name="fechaInicio" 
+                                formControlName="fechaInicio" 
+                                [showIcon]="true"
+                                dateFormat="dd/mm/yy" >
+                            </p-calendar>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="flex justify-content-start align-items-center">
+                        <div style="flex: 1;">
+                            <label for="inputField" style="width: 25%;">Fecha fin:</label>
+                        </div>
+                        <div style="flex: 2;">
+                            <p-calendar id="fechaFin" 
+                                type="fecha" 
+                                name="fechaFin" 
+                                formControlName="fechaFin" 
+                                [showIcon]="true"
+                                dateFormat="dd/mm/yy" >
+                            </p-calendar>
+                        </div>
+                    </div>
+                    
+                            
+                </div>    
+            </div>
+            <br>
+            
+        </form>
+        <p-button label="Guardar" 
+            [style]="{ 'background-color': '#E3B02E', 'border': 'none','color': 'black'}" 
+            [disabled]="!formSesionTutoriaObligatoria.valid"
+            class="flex justify-content-end"
+            (onClick)="guardar()">
+        </p-button>
+    </ng-container>
+
+    <ng-container *ngIf="ProgramacionActiva">
+        <!-- Contenido cuando ProgramacionActiva es null -->
+        <div class="text-center">
+            <p class="bg-yellow-200">Existe una programación de tutoria obligatoria activa. Espere que dicha programación finalize para crear uno nuevo. </p>
+            
+        </div>
+    </ng-container>
+
+    
+</div>
+<p-toast></p-toast>

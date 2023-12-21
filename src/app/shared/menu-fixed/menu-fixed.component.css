@@ -1,0 +1,44 @@
+.sidebar {
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 70px; /* Ajusta el ancho del sidebar según tus necesidades */
+  height: 100vh;
+  background-color: #061039;
+  padding: 2px;
+ 
+}
+
+.dropdown-menu {
+  
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-button {
+  margin: 1px;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.menu-button:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Cambia el valor RGBA según la transparencia deseada */
+}
+
+.menu-button .p-button-icon {
+  display: flex;
+  font-size: 25px;
+  justify-content: center;
+}
+
+
+

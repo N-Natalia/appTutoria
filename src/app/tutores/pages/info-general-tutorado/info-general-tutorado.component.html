@@ -1,0 +1,122 @@
+<app-home ></app-home>
+<div class="vista" style="position: relative; z-index: 0;">
+    <div class="text-center ">
+        <h1>Tutorado</h1>
+    </div>
+
+    <div>
+        <h4 class="m-0 pl-2 py-1 text-black-alpha-70" style="background: #99bbdcdf;">Datos del tutorado(a):</h4>
+            
+        <div *ngIf="tutorado" class="container" >
+            <div>
+                <div class="data-fields-labels">
+                    Nombre
+                </div>
+                <div class="data-fields-labels">
+                    Código
+                </div>
+            </div>
+            <div>
+                <div class="data-fields">
+                    {{tutorado.nombres}}
+                </div>
+                <div class="data-fields">
+                    {{tutorado.code}}
+                </div>
+            </div>
+            <div>
+                <div class="data-fields-labels">
+                    Apellidos
+                </div>
+                <div class="data-fields-labels">
+                    Email
+                </div>
+            </div>
+            <div>
+                <div class="data-fields">
+                    {{tutorado.apPaterno}} {{tutorado.apMaterno}} 
+                </div>
+                <div class="data-fields">
+                    {{tutorado.email}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <h4 class="m-0 pl-2 py-1 text-black-alpha-70" style="background: #99bbdcdf;">Complete o actualize los datos del tutorado(a):</h4>
+    
+    <form [formGroup]="formDatosTutoradoUpdate"
+          (ngSubmit)="onSubmit()">
+        <div style="display: flex; height: auto; background: #DFEAF4; ">
+            <div style="flex: 1; ">
+                <div class="flex flex-column gap-1" 
+                    style="margin: 8px;">
+                <label for="nroCelular_tutorado">Nro celular</label>
+                <input pInputText 
+                        formControlName="nroCelular_tutorado" 
+                        placeholder="Nro de celular"
+                        />  
+                </div>
+    
+                <div class="flex flex-column gap-1" 
+                    style="margin: 8px;">
+                <label for="direccion_tutorado">Dirección</label>
+                <input pInputText 
+                formControlName="direccion_tutorado"
+                        placeholder="Dirección"
+                        />  
+                </div>
+            </div>
+            <div style="flex: 1;">
+    
+                <div class="flex flex-column gap-1" 
+                    style="margin: 8px;">
+                <label for="namePersonReferencia">Nombre de persona de referencia</label>
+                <input pInputText 
+                formControlName="namePersonReferencia"
+                        placeholder="Persona de referencia"
+                        />  
+                </div>
+    
+                <div class="flex flex-column gap-1" 
+                    style="margin: 8px;">
+                <label for="nroCelPersonaReferencia">Nro celular de referencia</label>
+                <input pInputText 
+                formControlName="nroCelPersonaReferencia"
+                        placeholder="Nro de celular de referencia"
+                        />  
+                </div>
+                
+            </div>
+        </div>
+        <br>      
+
+        
+    </form>
+    <div style="display: flex; justify-content: space-between;">
+        <div>
+          <button pButton pRipple                   
+                  icon="pi pi-arrow-left"
+                  iconPos="left"
+                  [style]="{ 'background-color': '#E3B02E', 'border': 'none','color': 'black'}"
+                  (click)="retroceder()"
+          >
+          </button>
+        </div>
+        <div>
+            <button pButton pRipple 
+            label="Guardar cambios" 
+            (click)="onSubmit()"
+            [style]="{ 'background-color': '#E3B02E', 'border': 'none','color': 'black'}"
+            >
+            </button>
+        </div>
+    </div>
+    
+    <br>
+
+</div>
+<p-toast></p-toast>
+

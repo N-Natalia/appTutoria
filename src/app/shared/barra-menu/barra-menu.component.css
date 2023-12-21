@@ -1,0 +1,125 @@
+
+
+.flex {
+  display: flex;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.circle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: auto; /* Centrar horizontalmente */
+  margin-left: auto; /* Centrar horizontalmente */
+  width: fit-content; /* Ajustar el ancho al contenido */
+  margin-top: 1rem;
+}
+.circle-image {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+}
+
+.text-container {
+  text-align: center;
+  margin-top: 1rem;
+  color: white;
+  font-weight: bold;
+}
+
+.text-line {
+  line-height: 1;
+}
+
+
+
+ :host /deep/ .p-menu{
+  color: white !important;
+  background: #152259 !important;
+  border-radius: 0 !important; /* Eliminar el borde circular */
+  border: none !important; /* Eliminar las líneas de borde */
+  width: 250px;
+}
+
+
+
+:host /deep/ .p-menu .p-menuitem-link .p-menuitem-text {
+  color: white !important;
+}
+
+:host /deep/ .p-menu .p-menuitem-link .p-menuitem-icon {
+  color: white !important;
+}
+
+:host /deep/ .p-menu .p-submenu-header {
+  color: white !important;
+  background: #152259 !important;
+}
+
+:host /deep/ .p-menu {
+  background: #152259 !important;
+}
+
+:host /deep/ .p-menu .p-menuitem-link:hover {
+  background: #E3B02E !important;
+}
+
+:host /deep/ .p-menu .p-menuitem-link:focus {
+  box-shadow: 0 0 0 0.1rem #E3B02E !important;
+}
+
+
+/* ------------------------------------------------------------- */
+.sidebar {
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 70px; /* Ajusta el ancho del sidebar según tus necesidades */
+  height: 100vh;
+  background-color: #061039;
+  padding: 5px;
+}
+
+.dropdown-menu {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-button {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.menu-button:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Cambia el valor RGBA según la transparencia deseada */
+}
+
+.menu-button .p-button-label {
+  font-size: 8px; /* Ajusta el tamaño de los labels según tus necesidades */
+}
+
+::ng-deep .menu-button .p-button-label {
+  font-size: 8px;
+}
+
+::ng-deep .menu-button .p-button-icon {
+  font-size: 25px;
+}

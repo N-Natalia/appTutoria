@@ -1,0 +1,49 @@
+<div class="flex justify-content-center ">
+
+ 
+    <table>
+        <thead>
+            <tr class="yellow-background">
+                <th class="w-8rem p-3 m-3">Hora</th>
+                <th class="w-10rem p-3 m-3">Estado</th>
+                <th class="w-10rem p-3 m-3">Atender</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let fila of filas; let i = index">
+                <tr class=" text-center">
+                  <td class=" bg-gray w-12rem p-3 m-3">{{fila.HoraIntervalo}}</td>
+                  <td >
+
+                    <button type="button" pButton pRipple 
+                    class="data-cell block font-bold text-center border-none w-full h-full text-900 p-d-flex p-jc-center xl:w-18rem lg:w-16rem md:w-12rem sm:w-10rem "
+                    [ngClass]="{'bg-green': !fila.EstadoReserva}"
+                    [disabled]="true"
+                    >
+                        <div class="button-content"> 
+                        {{ !fila.EstadoReserva ? 'Disponible' : 'Reservado' }}
+                        </div>
+                    </button>
+
+
+
+                  </td>
+                  <td >
+                    <button pButton pRipple 
+                    label="Atender"
+                    icon="pi pi-pencil" 
+                    iconPos="right" 
+                    class="font-bold text-center border-none w-full h-full text-900 p-d-flex p-jc-center "
+                    [disabled]="false"
+                    style="background-color: bg-cyan-500;"
+                    >
+    
+                    </button>
+                  </td>
+                </tr>
+            </ng-container>
+            
+        </tbody>
+    </table> 
+
+</div>

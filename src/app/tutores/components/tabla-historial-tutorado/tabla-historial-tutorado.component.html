@@ -1,0 +1,44 @@
+<p-dropdown [options]="semestres" 
+            [(ngModel)]="semestreSeleccionado"
+            (ngModelChange)="onSemestreChange($event)" 
+            optionLabel="denominacionSemestre"
+            [style]="{ 'text-align': 'center','background-color': '#E3B02E','width':'100%','font-weight': 'bold' }"
+            [placeholder]="placeholderDropdown"> 
+</p-dropdown>
+
+
+<div class="dimension-title">
+<h3 style="font-weight: bold">Actividad de sesión de tutoría</h3>
+</div>
+
+<div *ngIf="semestreSeleccionado">
+<p-table *ngIf="detallesMostrados.length; else noDataTemplate" 
+        [scrollable]="true"
+        scrollHeight="300px" 
+        [value]="detallesMostrados"
+        styleClass="p-datatable-gridlines" 
+        [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+    <tr>
+        <th style="background-color:#DFEAF4;">Fecha</th>
+        <th style="background-color:#DFEAF4;">Dimensión</th>
+        <th style="background-color:#DFEAF4;">Descripción de actividad</th>
+        <th style="background-color:#DFEAF4;">Recomendaciones</th>
+        <th style="background-color:#DFEAF4;">Observaciones</th>
+    </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-detalle>
+    <tr>
+        <td>{{ detalle.fecha }}</td>
+        <td>{{ detalle.dimension }}</td>
+        <td>{{ detalle.descripcion }}</td>
+        <td>{{ detalle.referencia }}</td>
+        <td>{{ detalle.observacion }}</td>
+    </tr>
+    </ng-template>
+</p-table>
+<ng-template #noDataTemplate>
+    <div class="text-center">
+      <p class="bg-yellow-200">Aun no tiene programado ninguna sesión de tutoría. Realize una nueva programacion de reserva obligatoria.</p>
+    </div>
+  </ng-template>

@@ -1,0 +1,21 @@
+<div class="sidebar">
+  <div class="mt-7">
+    <div class="dropdown-menu" *ngFor="let button of itemsMenuFixed">
+      
+      <button pButton  icon="{{button.icon}}"  
+              class="menu-button" 
+              (click)="button.funcion()" >
+        <div  class="font-semibold" 
+              style="font-size: .60rem;">
+          {{button.label}}
+        </div>        
+      </button>
+              
+    </div>
+
+  </div>
+  
+</div>
+
+
+

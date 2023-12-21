@@ -1,0 +1,79 @@
+
+
+<app-home ></app-home>
+<app-detalle-mensaje-reserva></app-detalle-mensaje-reserva>
+<div class="vista" style="position: relative; z-index: 0;">
+  
+  <div class="text-center ">
+    <h1>¡Reserva tu sesión de tutoría obligatoria!</h1>
+  </div>
+
+  <div *ngIf="programacionMostrar.length; else noDataTemplate">
+    <h4 class="m-0 pl-2 py-1 text-black-alpha-70" style="background: #99bbdcdf;"> 
+      <div  *ngIf="programacionActivo.totalBloques==1">
+        Datos generales de la programación con " {{programacionActivo.totalBloques}} " bloque de atención:
+      </div>
+      <div  *ngIf="programacionActivo.totalBloques==2">
+        Datos generales de la programación con " {{programacionActivo.totalBloques}} " bloques de atención:
+      </div>
+    </h4>
+    
+    <app-datos-programacion-ro [FechaInicio]="formatearUTCFecha(programacionActivo.fechaInicio!.toISOString())"[FechaFin]="formatearUTCFecha(programacionActivo.fechaFin!.toISOString())" [duracion]="programacionActivo.duracion!" [totalTutorados]="totalTutorados" [semestre]="semestreDenominacion" [tipoReunion]="programacionActivo.tipo!" ></app-datos-programacion-ro>
+    <h4 class="m-0 pl-2 py-1 text-black-alpha-70" style="background: #99bbdcdf;">Datos del bloque " {{nroBloque}} " de atención:</h4>
+
+    <app-detalle-programacion-ro [fecha]="formatearUTCFecha(detalleActivo.fecha!.toISOString())" [hora]="convertirHoraString_Date(detalleActivo.horaInicioSesionTutoria!)" [duracion]="programacionActivo.duracion!" [totalTutorados]="totalTutorados"></app-detalle-programacion-ro>
+
+    <br>
+    <div class="tabla flex align-items-center justify-content-center ">
+      <table>
+        <thead>
+          <tr class="yellow-background">
+            <th class="py-2 w-12rem">Hora</th>
+            <th class="py-2 xl:w-28rem lg:w-20rem md:w-12rem sm:w-12rem ">Estado</th>
+          </tr>
+          
+        </thead>
+        <tbody>
+          <tr *ngFor="let programacion of programacionMostrar; let i = index">
+            
+            <td class="yellow-background"> 
+              <div class="px-3 w-12rem">
+                {{ programacion.HoraIntervalo }}
+              </div>            
+            </td>
+
+            <td >
+          
+
+              <button type="button" pButton pRipple class="data-cell block font-bold text-center border-none w-full h-full text-900 p-d-flex p-jc-center xl:w-28rem lg:w-20rem md:w-12rem sm:w-12rem  "
+              [ngClass]="{
+                'bg-green': !programacion.EstadoReserva,
+                'bg-blue' : programacion.EstadoReserva && !programacion.MiReserva,
+                'bg-sky' : programacion.EstadoReserva && programacion.MiReserva
+              }"
+              [disabled]="programacion.EstadoReserva && !programacion.MiReserva"
+              (click)="confirm1(programacion)"
+              >
+                <div class="button-content"> 
+                  {{ programacion.EstadoReserva && !programacion.MiReserva? 'Reservado' : programacion.EstadoReserva && programacion.MiReserva? 'Mi reserva':'Disponible' }}
+                </div>
+              </button>
+
+
+            </td>
+          </tr>        
+        </tbody>
+      </table>
+    </div>  
+    <br>
+    <app-leyenda-tutorados></app-leyenda-tutorados>
+  </div>
+  <ng-template #noDataTemplate>
+    <div class="text-center">
+      <p class="bg-yellow-200">No tiene ninguna programación de sesión de tutoría para mostrar.</p>
+    </div>
+  </ng-template>
+
+</div>
+<p-toast></p-toast>
+

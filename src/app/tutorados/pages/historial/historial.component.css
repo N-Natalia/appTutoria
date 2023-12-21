@@ -1,0 +1,40 @@
+.vista{
+    margin-top: 80px;
+    margin-left: 110px;
+    margin-right: 40px;
+    margin-bottom: 40px;
+  }
+  
+  
+  
+    .caption-heading {
+      display: flex;
+      justify-content: center;
+      background-color: #E3B02E;
+    }
+  
+    .data-fields {
+      font-size: 18px; 
+      color: black;
+      font-size: 1.4vw;
+      background-color: #DFEAF4; 
+      width: 100%; 
+      height: 35px ; 
+      display: flex;  
+      align-items: center;  
+      border: 1px solid white;
+      
+  }
+    
+  .dimension-title{
+      background-color: #E3B02E; 
+      height: 45px; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center;  
+      border: 1px solid #E3B02E;
+      text-align: center;
+      color: black;
+      border-radius: 5px;
+      font-weight:bold;
+  }

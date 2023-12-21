@@ -1,0 +1,42 @@
+.tabla {
+    overflow-x: auto;
+  }
+  .tabla th:nth-child(1),
+  .tabla td:nth-child(1) {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+  }
+  
+  .tabla th,
+  .tabla td {
+    width: 170px; /* Cambia este valor según tus preferencias */
+  }
+  
+  .button-content {
+      display: flex;
+      align-items: center;
+      /* Alinea verticalmente los elementos en el centro */
+      margin-top: 5px;
+      margin-bottom: 5px;
+  }
+  
+  .text {
+      flex: 1;
+  }
+  
+  .yellow-background {
+      background-color: #E3B02E;
+  }
+  
+  .bg-green {
+      background-color: #3EB13C;
+  }
+  
+  .bg-gray {
+      background-color: #BDBDBD;
+  }
+  
+  .bg-sky {
+    background-color: #40b0e4;
+  }

@@ -1,0 +1,33 @@
+.data-fields-labels {
+    font-size: 18px; 
+    color: black;
+    font-size: 1rem;
+    background-color: #B9D7F1; 
+    width: 100%; 
+    height: 35px ; 
+    display: flex;  
+    align-items: center;  
+    border: 1px solid white;    
+    padding-left: 7px;
+}
+.data-fields {
+    font-size: 18px; 
+    color: black;
+    font-size: 1rem;
+    background-color: #DFEAF4; 
+    width: 100%; 
+    height: 35px ; 
+    display: flex;  
+    align-items: center;  
+    border: 1px solid white;    
+    padding-left: 7px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 2fr; /* Define las 4 columnas con anchos diferentes */
+    
+    width: 100%;
+    height: auto; /* Altura de la ventana completa */
+}
+

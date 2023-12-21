@@ -1,0 +1,203 @@
+<app-home></app-home>
+<app-detalle-mensaje-reserva></app-detalle-mensaje-reserva>
+<div class="vista" style="position: relative; z-index: 0;">
+
+  <div class="text-center ">
+    <h1>Reserva una sesión de tutoría voluntaria</h1>
+  </div>
+  <div class="tabla flex align-items-center justify-content-center "> 
+    <table>
+      <thead>
+        <tr class="yellow-background">
+          <th class="bg-white"></th>
+          <ng-container *ngFor="let dia of diasSemana; let i = index">
+            <th>
+              <div class="py-2 ">
+                {{ dia }}
+              </div>
+            </th>
+          </ng-container>
+        </tr>
+        <tr>
+          <th class="yellow-background">
+            <div class="py-2 xl:w-12rem lg:w-10rem md:w-7rem sm:w-7rem">
+              Hora
+            </div>
+          </th>
+          <ng-container *ngFor="let date of datosParaMostrar">
+            <th class="yellow-background">{{ date }}</th>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let horario of horarios">
+          <tr>
+
+            <td class="font-bold lowercase yellow-background">
+              <div class="px-3 ">
+                {{ formatoTiempoConDuracion(horario.Hora, horario.Duracion) }}
+              </div>
+            </td>
+
+
+            <td>
+
+              <button type="button" pButton pRipple [ngClass]="{
+                  'bg-green': estadoGreen('Lunes', horario.Hora),
+                  'bg-gray' : !esDisponible('Lunes', horario.Hora),
+                  'bg-sky'  : estadoSky('Lunes', horario.Hora),
+                  'bg-blue' : estadoBlue('Lunes', horario.Hora)}" 
+                  class="data-cell block font-bold text-center border-none w-full h-full text-900"
+                  [disabled]="buttomDesabilitado('Lunes', horario.Hora,0)"
+                  (click)="confirm1('Lunes', horario.Hora, horario.Duracion)">
+
+                <div class="button-content">
+
+                  <p-checkbox *ngIf="checkboxExist('Lunes', horario.Hora)"
+                    [ngModel]="horarioNoAgrupadoEstadoConfirmacion('Lunes', horario.Hora)" 
+                    [binary]="true"
+                    [disabled]="true" 
+                    inputId="binary" 
+                    class="mr-1" 
+                    [ngStyle]="{ 'color': 'red' }">
+                  </p-checkbox>
+                  <div class="text-center">
+                    {{textoButtom('Lunes', horario.Hora)}}
+                  </div>
+
+                </div>
+              </button>
+            </td>
+
+
+            <td>
+              <button type="button" pButton pRipple [ngClass]="{
+                'bg-green': estadoGreen('Martes', horario.Hora),
+                'bg-gray' : !esDisponible('Martes', horario.Hora),
+                'bg-sky'  : estadoSky('Martes', horario.Hora),
+                'bg-blue' : estadoBlue('Martes', horario.Hora)}" 
+                class="data-cell block font-bold text-center border-none w-full h-full text-900"
+                [disabled]="buttomDesabilitado('Martes', horario.Hora,1)"
+                (click)="confirm1('Martes', horario.Hora, horario.Duracion)">
+
+                <div class="button-content">
+                  <p-checkbox *ngIf="checkboxExist('Martes', horario.Hora)"
+                    [ngModel]="horarioNoAgrupadoEstadoConfirmacion('Martes', horario.Hora)" 
+                    [binary]="true"
+                    [disabled]="true" 
+                    inputId="binary" 
+                    class="mr-1">
+                  </p-checkbox>
+                  {{ textoButtom('Martes', horario.Hora) }}
+                </div>
+              </button>
+            </td>
+
+
+
+            <td>
+              <button type="button" pButton pRipple
+                [ngClass]="{
+                'bg-green': estadoGreen('Miércoles', horario.Hora),
+                'bg-gray' : !esDisponible('Miércoles', horario.Hora),
+                'bg-sky'  : estadoSky('Miércoles', horario.Hora),
+                'bg-blue' : estadoBlue('Miércoles', horario.Hora)}" 
+                class="data-cell block font-bold text-center border-none w-full h-full text-900"
+                [disabled]="buttomDesabilitado('Miércoles', horario.Hora,2)"
+                (click)="confirm1('Miércoles', horario.Hora, horario.Duracion)">
+
+                <div class="button-content">
+                  <p-checkbox *ngIf="checkboxExist('Miércoles', horario.Hora)"
+                    [ngModel]="horarioNoAgrupadoEstadoConfirmacion('Miércoles', horario.Hora)" 
+                    [binary]="true"
+                    [disabled]="true" 
+                    inputId="binary" 
+                    class="mr-1">
+                  </p-checkbox>
+
+                  {{
+                  textoButtom('Miércoles', horario.Hora)
+                  }}
+                </div>
+              </button>
+            </td>
+
+
+            <td>
+              <button type="button" pButton pRipple [ngClass]="{
+                'bg-green': estadoGreen('Jueves', horario.Hora),
+                'bg-gray' : !esDisponible('Jueves', horario.Hora),
+                'bg-sky'  : estadoSky('Jueves', horario.Hora),
+                'bg-blue' : estadoBlue('Jueves', horario.Hora)}"
+                class="data-cell block font-bold text-center border-none w-full h-full text-900"
+                [disabled]="buttomDesabilitado('Jueves', horario.Hora,3)"
+                (click)="confirm1('Jueves', horario.Hora, horario.Duracion)">
+
+                <div class="button-content">
+                  <p-checkbox *ngIf="checkboxExist('Jueves', horario.Hora)"
+                    [ngModel]="horarioNoAgrupadoEstadoConfirmacion('Jueves', horario.Hora)" 
+                    [binary]="true"
+                    [disabled]="true" 
+                    inputId="binary" 
+                    class="mr-1">
+                  </p-checkbox>
+                  {{ textoButtom('Jueves', horario.Hora) }}
+                </div>
+              </button>
+            </td>
+
+
+
+            <td>
+              <button type="button" pButton pRipple [ngClass]="{
+                'bg-green': estadoGreen('Viernes', horario.Hora),
+                'bg-gray' : !esDisponible('Viernes', horario.Hora),
+                'bg-sky'  : estadoSky('Viernes', horario.Hora),
+                'bg-blue' : estadoBlue('Viernes', horario.Hora)
+              }" class="data-cell block font-bold text-center border-none w-full h-full text-900"
+                [disabled]="buttomDesabilitado('Viernes', horario.Hora,4)"
+                (click)="confirm1('Viernes', horario.Hora, horario.Duracion)">
+
+                <div class="button-content">
+
+                  <p-checkbox *ngIf="checkboxExist('Viernes', horario.Hora)"
+                    [ngModel]="horarioNoAgrupadoEstadoConfirmacion('Viernes', horario.Hora)" [binary]="true"
+                    [disabled]="true" inputId="binary" class="mr-1">
+                  </p-checkbox>
+                  {{ textoButtom('Viernes', horario.Hora) }}
+                </div>
+              </button>
+            </td>
+
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+
+  </div>
+
+
+  <div class="text-center">
+    <br>
+    
+      <p-button type="button" 
+                icon="pi pi-chevron-left" 
+                (click)="retrocederSemana()"
+                styleClass="p-button-text"
+                label="Atrás" 
+                [disabled]="posicionFechaMostrar==0">
+      </p-button>
+      <p-button type="button" 
+                icon="pi pi-chevron-right" 
+                iconPos="right" 
+                (click)="avanzarSemana()"
+                styleClass="p-button-text" 
+                label="Siguiente" 
+                [disabled]="posicionFechaMostrar==semanasSiguientes">
+      </p-button>
+    
+  </div>
+  <br>
+  <app-leyenda-tutorados></app-leyenda-tutorados>
+</div>
+<p-toast></p-toast>

@@ -1,0 +1,37 @@
+
+
+<div *ngIf="sidebarVisible">
+  <p-sidebar  [(visible)]="sidebarVisible" [showCloseIcon]="true" dismissable="false" [blockScroll]="true" [style]="{ 'background-color': '#061039' }">
+    <div class="flex justify-end align-center">
+      <div class="circle-container">
+        <img src="../../../assets/logo-EPIIS-Sin-fondo.png" alt="Imagen" class="circle-image">
+      </div>
+    
+     
+    </div>
+  
+    <div class="text-container">
+      <div class="text-line">Sistema Tutoría</div>
+      <div class="text-line">EPIIS - UNSAAC</div>
+      <br>
+    </div>
+    <hr class="divider">
+    <br>
+  
+      
+    <div class="card flex justify-content-center">
+      <p-toast></p-toast>
+        <div class="menu-container bg-blue-900">
+          <p-menu [model]="items" ></p-menu>
+        </div>
+      </div>
+  </p-sidebar>
+  
+</div>
+
+  
+<button pButton (click)="sidebarVisible = true" icon="pi pi-bars" [style]="{'position': 'fixed', 'top': '9px', 'left': '8px', 'z-index': '999', 'background-color': '#3C4775', 'border':'none'}"></button>
+  
+
+<app-menu-fixed *ngIf="!sidebarVisible" [itemsMenuFixed]="itemsMenFixed" style="position: relative; z-index: 1;"></app-menu-fixed>
+

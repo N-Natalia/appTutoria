@@ -1,0 +1,24 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3C4775;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  padding-right: 40px;
+}
+
+.blue-background {
+  background-color: #3C4775;
+  color: white;
+}
+
+.title,
+.actions {
+  display: flex;
+  align-items: center;
+}

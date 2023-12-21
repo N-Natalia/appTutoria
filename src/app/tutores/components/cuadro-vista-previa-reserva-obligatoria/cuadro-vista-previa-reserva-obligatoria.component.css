@@ -1,0 +1,29 @@
+.text {
+    flex: 1;
+}
+
+.yellow-background {
+    background-color: #E3B02E;
+}
+
+.bg-green {
+    background-color: #3EB13C;
+}
+
+.bg-gray {
+    background-color: #BDBDBD;
+}
+
+
+.my-cell {
+    width: 30% !important;
+}
+
+.button-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+

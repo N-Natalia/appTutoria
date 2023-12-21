@@ -1,0 +1,43 @@
+<app-home></app-home>
+<div class="vista" style="position: relative; z-index: 0;">
+    <h1 style="display: flex; justify-content: center;">Reportes</h1>
+
+    <br>
+    <p-dropdown [options]="listaTutoresMostrar" 
+    [(ngModel)]="tutorSeleccionado"
+    (ngModelChange)="onTutorChange($event)" 
+    optionLabel="nombresTutor"
+    [style]="{ 'text-align': 'center','background-color': '#E3B02E','width':'100%','font-weight': 'bold' }"> 
+    </p-dropdown>
+    <br>
+
+    <div *ngIf="listaCargasActivasMostrarFiltrado">
+        <div class="card">
+            <p-toast></p-toast>
+            <p-table [value]="listaCargasActivasMostrarFiltrado" [scrollable]="true" scrollHeight="460px">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="background-color:#E3B02E;">Código tutorado</th>
+                        <th style="background-color:#E3B02E;">Nombres tutorado</th>
+                        <th style="background-color:#E3B02E;">Nombres tutor</th>
+                        <th class="text-center" style="background-color:#E3B02E;">Historial</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-carga>
+                    <tr>
+                        <td>{{ carga.codeTutorado }}</td>
+                        <td>{{ carga.nombresTutorado }}</td>
+                        <td>{{ carga.nombresTutor }}</td>
+                        <td class="text-center">
+                            <p-button icon="pi pi-book" 
+                                    routerLink="/administrador/historialTutorado/{{carga.codeTutorado}}"
+                                    [style]="{ 'background-color': '#3C4775', 'border': 'none','color': 'white'}">
+                            </p-button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    
+</div>

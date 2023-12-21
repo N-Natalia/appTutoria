@@ -1,0 +1,102 @@
+
+<app-home ></app-home>
+<div class="vista" style="position: relative; z-index: 0;">
+    <div class="text-center ">
+        <h1>Mis datos</h1>
+    </div>
+
+    <div>
+        <h4 class="m-0 pl-2 py-1 text-black-alpha-70" style="background: #99bbdcdf;">Datos generales:</h4>
+            
+        <div *ngIf="tutor" class="container" >
+            <div>
+                <div class="data-fields-labels">
+                    Nombre
+                </div>
+                <div class="data-fields-labels">
+                    Código
+                </div>
+            </div>
+            <div>
+                <div class="data-fields">
+                    {{tutor.nombres}}
+                </div>
+                <div class="data-fields">
+                    {{tutor.code}}
+                </div>
+            </div>
+            <div>
+                <div class="data-fields-labels">
+                    Apellidos
+                </div>
+                <div class="data-fields-labels">
+                    Email
+                </div>
+            </div>
+            <div>
+                <div class="data-fields">
+                    {{tutor.apPaterno}} {{tutor.apMaterno}} 
+                </div>
+                <div class="data-fields">
+                    {{tutor.email}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <h4 class="m-0 pl-2 py-1 text-black-alpha-70" style="background: #99bbdcdf;">Complete o actualize sus datos:</h4>
+
+    <form [formGroup]="formDatosTutorUpdate"
+          (ngSubmit)="onSubmit()">
+        <div style="display: flex; height: auto; background: #DFEAF4; ">
+            <div style="flex: 1; ">
+                <div class="flex flex-column gap-1" 
+                    style="margin: 8px;">
+                <label for="nroCelular_tutor">Nro celular</label>
+                <input pInputText 
+                        formControlName="nroCelular_tutor" 
+                        placeholder="Nro de celular"
+                        />  
+                </div>
+    
+                <div class="flex flex-column gap-1" 
+                    style="margin: 8px;">
+                <label for="lugar_reunion">Lugar de reunión</label>
+                <input pInputText 
+                formControlName="lugar_reunion"
+                        placeholder="Ingrese el lugar de reunión (Ej. Cubículo)."
+                        />  
+                </div>
+            </div>
+            <div style="flex: 1;">
+    
+                <div class="flex flex-column gap-1" 
+                    style="margin: 8px;">
+                <label for="enlace_reunion">Enlace de sala google meet</label>
+                <input pInputText 
+                formControlName="enlace_reunion"
+                        placeholder="Ingrese su enlace de sala de meet."
+                        />  
+                </div>
+    
+                
+                
+            </div>
+        </div>
+        <br>
+
+        <div style="display: flex; justify-content: flex-end; ">
+            <button pButton pRipple 
+                    label="Guardar cambios" 
+                    [style]="{ 'background-color': '#E3B02E', 'border': 'none','color': 'black'}"
+                    >
+            </button>
+        </div>
+    </form>
+    
+    <br>
+
+</div>
+<p-toast></p-toast>

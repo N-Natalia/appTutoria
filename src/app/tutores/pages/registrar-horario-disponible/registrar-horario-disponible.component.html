@@ -1,0 +1,276 @@
+<app-home></app-home>
+<div class="vista" style="position: relative; z-index: 0;">
+    
+    <div class="card">
+        <p-toast></p-toast>
+        <p-confirmDialog #cd1 key="dialogo1"[style]="{width: '50vw'}" [closable]="true" [dismissableMask]="true">
+            <ng-template pTemplate="header">
+                <h1 class="text-center">Horario</h1>
+            </ng-template>
+            <ng-template pTemplate="footer">
+            
+            <div  class="text-center">
+                <div *ngIf="!horarioSeleccionado">
+                    <div class="font-bold">Seleccionar tipo de reunión:</div>
+                    <div style="height: 5px;"></div>              
+                    <div class="flex">
+                        <div class="flex align-items-center justify-content-center m-2 px-3 ">
+                            <p-radioButton value="Presencial" [(ngModel)]="tipoReunion" inputId="tipoReunion1">
+                            </p-radioButton>
+                            <label for="tipoReunion1" class="ml-2">Presencial</label>
+                        </div>
+                        <div class="flex align-items-center justify-content-center m-2 px-3">
+                            <p-radioButton value="Virtual" [(ngModel)]="tipoReunion" inputId="tipoReunion2" >
+                            </p-radioButton>
+                            <label for="tipoReunion2" class="ml-2">Virtual</label>
+                        </div>
+                    </div>                    
+                    <div style="height: 10px;"></div>
+                    
+                </div>
+                
+                <button type="button" pButton icon="pi pi-times" label="Eliminar" class="p-button-danger" (click)="cd1.reject()" [disabled]="!horarioSeleccionado"></button>
+                <button type="button" pButton icon="pi pi-check" label="Agregar" class="p-button-success" (click)="cd1.accept()" [disabled]="horarioSeleccionado || !tipoReunion"></button>
+
+            </div>
+            
+            </ng-template>
+        </p-confirmDialog>
+        
+        <p-confirmDialog key="dialogo2" #cd2 [style]="{width: '50vw'}" [closable]="true" [dismissableMask]="true">
+            <ng-template pTemplate="header">
+                <h1 class="text-center">Nuevo horario</h1>
+            </ng-template>
+            <ng-template pTemplate="footer">
+            
+            <div class="text-left ">
+                
+                <form  [formGroup]="formNuevoIntervaloFila" (ngSubmit)="cd2.accept()">
+                    <div class="bg-blue-100 p-2 pt-4 pb-4">
+                        <div style="display: grid; grid-template-columns: 1fr 2fr; align-items: center; gap: 10px;">
+                            <label class="font-bold">Hora inicio:</label>
+                            <div class="flex flex-column gap-2">
+                                <p-calendar  id="horaInicio" 
+                                        type="horaInicio" 
+                                        name="horaInicio" 
+                                        formControlName="horaInicio"  
+                                        [showTime]="true" 
+                                        [showSeconds]="true" 
+                                        [timeOnly]="true"
+                                        [style]="{'width': '90%'}"
+                                        placeholder="00:00:00">
+                                </p-calendar>
+                                <small id="username-help">La hora tiene el formato de 24hrs.</small>
+                            </div>
+                            
+                            
+                            
+                            <label class="font-bold" >Duración:</label>
+                            <div class="flex flex-column gap-2">
+                                <p-inputNumber  id="intervaloDuracion" 
+                                            type="intervaloDuracion" 
+                                            name="intervaloDuracion" 
+                                            formControlName="intervaloDuracion" 
+                                            [showButtons]="true" 
+                                            inputId="integeronly" 
+                                            suffix=" min"
+                                            [min]="10"
+                                            [max]="30"
+                                            [step]="5">
+                                </p-inputNumber>
+                            </div>
+                                                       
+
+                            <label for="inputField" class="font-bold" style="width: 40%;">Tipo horario:</label>
+                            <p-dropdown id="tipoReunion" 
+                                                type="tipoReunion" 
+                                                name="tipoReunion" 
+                                                formControlName="tipoReunion" 
+                                                [options]="tiposReunion"
+                                                optionLabel="name" 
+                                                [style]="{'width': '90%'}">
+                            </p-dropdown>
+
+                            <label for="inputField"  class="font-bold" style="width: 100%;">Día:</label>
+                            <p-dropdown id="dia" 
+                                                type="dia" 
+                                                name="dia" 
+                                                formControlName="dia" 
+                                                [options]="dias"
+                                                optionLabel="name" 
+                                                [style]="{'width': '90%'}">
+                            </p-dropdown>
+                        </div> 
+
+                    </div>
+                    
+                    <br>
+                    <div class="text-center">
+                        <button type="button" pButton icon="pi pi-check" 
+                        [disabled]="!formNuevoIntervaloFila.valid"
+                        label="Agregar" class="p-button-success" (click)="cd2.accept()"></button>  
+
+                    </div>
+                     
+                </form>
+            </div>
+            
+            </ng-template>
+        </p-confirmDialog>
+
+    </div>
+      
+    <div class="text-center ">
+        <h1>Mis horarios disponibles</h1>
+    </div>
+    <div class="tabla flex align-items-center justify-content-center ">
+        <table>
+            <thead>
+                <tr class="yellow-background">
+                    <th  class="yellow-background" >Hora</th>
+                    <ng-container *ngFor="let dia of diasSemana; let i = index">
+                        <th>
+                            <div class="py-2 ">
+                                {{ dia }}
+                            </div>
+                        </th>
+                    </ng-container>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let horario of horarios">
+                    <tr>
+                        <td class="font-medium lowercase yellow-background xl:w-12rem lg:w-10rem md:w-9rem sm:w-8rem">
+                            <div class="px-3 ">
+                                {{ formatoTiempoConDuracion(horario.Hora, horario.Duracion) }}
+                            </div>
+                        </td>
+                        <td>
+
+                            <button type="button" pButton pRipple 
+                                [ngClass]="{
+                                'bg-green': esDisponible('Lunes', horario.Hora) ,
+                                'bg-gray' : !esDisponible('Lunes', horario.Hora)}" 
+                                class="data-cell block custom-bottom"
+                                
+                                (click)="confirm1('dialogo1','Lunes', horario.Hora, horario.Duracion)"
+                                >   
+                                                         
+
+                                <div class="button-content">
+
+                                    <div class="text-center">
+                                        {{ 
+                                            !esDisponible('Lunes', horario.Hora) ? 'Agregar' : 'Horario agregado'
+                                        }}         
+                                    </div>
+
+                                </div>
+                            </button>
+                        </td>
+
+
+                        <td>
+                            <button type="button" pButton pRipple 
+                                [ngClass]="{
+                                    'bg-green': esDisponible('Martes', horario.Hora) ,
+                                    'bg-gray' : !esDisponible('Martes', horario.Hora)}" 
+                                class="data-cell block custom-bottom"
+                                
+                                (click)="confirm1('dialogo1','Martes', horario.Hora, horario.Duracion)"
+                                > 
+                                
+                                <div class="button-content">  
+                                    
+                                    {{ 
+                                        !esDisponible('Martes', horario.Hora) ? 'Agregar' : 'Horario agregado' 
+                                    }}
+
+                                </div>
+                            </button>
+                        </td>
+
+
+
+                        <td>
+                            <button type="button" pButton pRipple 
+                                [ngClass]= "{
+                                    'bg-green': esDisponible('Miércoles', horario.Hora) ,
+                                    'bg-gray' : !esDisponible('Miércoles', horario.Hora)}" 
+                                class="data-cell block custom-bottom"
+                            
+                                (click)="confirm1('dialogo1','Miércoles', horario.Hora, horario.Duracion)"
+                                >
+                                
+
+                                <div class="button-content">
+                                    {{ 
+                                        !esDisponible('Miércoles', horario.Hora) ? 'Agregar' : 'Horario agregado' 
+                                    }}
+                                </div>
+                            </button>
+                        </td>
+
+
+                        <td>
+                            <button type="button" pButton pRipple 
+                                [ngClass]="{
+                                    'bg-green': esDisponible('Jueves', horario.Hora) ,
+                                    'bg-gray' : !esDisponible('Jueves', horario.Hora)}" 
+                                class="data-cell block custom-bottom"
+                                
+                                (click)="confirm1('dialogo1','Jueves', horario.Hora, horario.Duracion)"
+                                >   
+                               
+                                
+                                <div class="button-content">
+                                    
+                                    {{ 
+                                        !esDisponible('Jueves', horario.Hora) ? 'Agregar' : 'Horario agregado' 
+                                    }}
+                                </div>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" pButton pRipple 
+                                [ngClass]="{
+                                    'bg-green': esDisponible('Viernes', horario.Hora) ,
+                                    'bg-gray' : !esDisponible('Viernes', horario.Hora)}" 
+                                class="data-cell block custom-bottom"
+                                
+                                (click)="confirm1('dialogo1','Viernes', horario.Hora, horario.Duracion)"
+                                > 
+                                 
+                                
+                                <div class="button-content">
+
+                                    {{ 
+                                        !esDisponible('Viernes', horario.Hora) ? 'Agregar' : 'Horario agregado' 
+                                    }}
+                                </div>
+                            </button>
+                        </td>
+
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+
+        
+    </div>
+    
+    
+    <div style="display: flex; justify-content: flex-end;">
+        <button pButton pRipple 
+                label="Nuevo" 
+                icon="pi pi-plus-circle"
+                iconPos="left"
+                class="myButton"
+                (click)="confirm2('dialogo2')"
+                >
+        </button>
+    </div>
+
+</div>
+
+<p-toast></p-toast>

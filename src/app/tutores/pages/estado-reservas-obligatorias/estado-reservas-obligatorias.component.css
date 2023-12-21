@@ -1,0 +1,73 @@
+.vista{
+    margin-top: 80px;
+    margin-left: 110px;
+    margin-right: 40px;
+    margin-bottom: 40px;
+}
+.custom-buttom button:hover {
+  box-shadow: 0 0 10px rgb(0, 0, 0);
+}
+.tabla {
+    overflow-x: auto;
+  }
+  .tabla th:nth-child(1),
+  .tabla td:nth-child(1) {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+  }
+  
+  .tabla th,
+  .tabla td {
+    width: 170px; /* Cambia este valor según tus preferencias */
+  }
+  
+  .button-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 5px;
+      margin-bottom: 5px;
+  }
+  
+  .text {
+      flex: 1;
+  }
+  
+  .yellow-background {
+      background-color: #E3B02E;
+  }
+  
+  .bg-green {
+      background-color: #3EB13C;
+  }
+  
+  .bg-gray {
+      background-color: #BDBDBD;
+  }
+  
+  .bg-sky {
+    background-color: #40b0e4;
+  }
+  
+  .data-cell:hover {
+    box-shadow: 5px 5px 5px #888888;
+    background-color: #1a2e95;
+  }
+  
+  
+  :host ::ng-deep .p-dialog-header {
+    display: flex;
+    justify-content: center;
+  }
+  :host ::ng-deep .p-dialog .p-dialog-content {
+    display: flex;
+    justify-content: center;
+  }
+  
+  
+  :host ::ng-deep .p-dialog-footer {
+    display: flex;
+    justify-content: center;
+  }
+  /* ------- */

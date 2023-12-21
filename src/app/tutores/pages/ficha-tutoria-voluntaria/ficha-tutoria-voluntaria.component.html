@@ -1,0 +1,298 @@
+<app-home ></app-home>
+<div class="vista" style="position: relative; z-index: 0;">
+    <div class="text-center ">
+        <h1>Atención de la sesión de tutoría</h1>
+    </div>
+    <div *ngIf="tutorado" style="display: flex; justify-content: flex-end; margin-right: 10px; ">
+        
+        <p-button label="Historial" 
+                    icon="pi pi-book" 
+                    iconPos="right" 
+                    class="custom-button"
+                    [style]="{ 'background-color': '#E3B02E', 'border': 'none', 'color': 'black' }"
+                    routerLink="/tutores/historialTutorado/{{tutorado.code}}"
+            >
+        </p-button>
+        
+    </div>  
+    <app-datos-tutorado [Tutorado]="tutorado"></app-datos-tutorado>
+    <br>
+
+    <form [formGroup]="formFichaSesionTutoria"
+            (ngSubmit)="onSubmit()">
+
+        <h4 class="m-0 pl-2 py-1 text-black-alpha-70" style="background: #99bbdcdf;">Complete o actualize los datos del tutorado(a):</h4>
+
+        <div style="display: flex; height: auto; background: #DFEAF4; ">
+            <div style="flex: 1; ">
+                <div class="flex flex-column gap-1" 
+                    style="margin: 8px;">
+                <label [for]="formControlNames[0]">{{labels[0]}}</label>
+                <input pInputText 
+                        [formControlName] = "formControlNames[0]" 
+                        [placeholder]="nroCelularT"
+                        />  
+                </div>
+
+                <div class="flex flex-column gap-1" 
+                    style="margin: 8px;">
+                <label [for]="formControlNames[1]">{{labels[1]}}</label>
+                <input pInputText 
+                        [formControlName] = "formControlNames[1]" 
+                        [placeholder]="direccionT"
+                        />  
+                </div>
+            </div>
+            <div style="flex: 1;">
+
+                <div class="flex flex-column gap-1" 
+                    style="margin: 8px;">
+                <label [for]="formControlNames[2]">{{labels[2]}}</label>
+                <input pInputText 
+                        [formControlName] = "formControlNames[2]" 
+                        [placeholder]="personaRef"
+                        />  
+                </div>
+
+                <div class="flex flex-column gap-1" 
+                    style="margin: 8px;">
+                <label [for]="formControlNames[3]">{{labels[3]}}</label>
+                <input pInputText 
+                        [formControlName] = "formControlNames[3]" 
+                        [placeholder]="nroCelPersonaRef"
+                        />  
+                </div>
+                
+            </div>
+        </div>
+        <br>
+
+
+        <app-generalidades-tutoria-academica [Semestre]="semestreDenominacion" [Fecha]="fechaCadena"></app-generalidades-tutoria-academica>
+
+        <br>
+        <strong style="display: flex; justify-content: center;font-size:1.25rem">Actividad de sesión de tutoría</strong>
+        <br>
+
+        <div>
+            <div class="card flex justify-content-center">
+                <p-accordion class="w-full custom-accordion">
+                    <p-accordionTab>
+                        <ng-template pTemplate="header">
+                            <div class="flex align-items-center">
+                                <i class="pi pi-book mr-2"></i>
+                                <span class="vertical-align-middle">Dimensión  {{ dimensiones[0] }}</span>
+                            </div>
+                        </ng-template>
+                        
+                        <ng-template pTemplate="content">
+                            <div class="dimension-title">
+                                <span class="general-dimension-title">
+                                    DIMENSIÓN {{ dimensiones[0]| uppercase }}
+                                </span>
+                            </div>
+            
+                            <ng-container *ngTemplateOutlet="cuadroAcademico"></ng-container>
+                        </ng-template>
+                    </p-accordionTab>
+                    <p-accordionTab>
+                        <ng-template pTemplate="header">
+                            <div class="flex align-items-center">
+                                <i class="pi pi-briefcase mr-2"></i>
+                                <span class="vertical-align-middle">Dimensión  {{ dimensiones[1] }}</span>
+                                
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="content">
+                            <div class="dimension-title">
+                                <span class="general-dimension-title">
+                                    DIMENSIÓN {{ dimensiones[1]| uppercase }}
+                                </span>
+                            </div>
+                            <ng-container *ngTemplateOutlet="cuadroProfesional"></ng-container>
+                        </ng-template>
+                    </p-accordionTab>
+                    <p-accordionTab>
+                        <ng-template pTemplate="header">
+                            <div class="flex align-items-center">
+                                <i class="pi pi-user mr-2"></i>
+                                <span class="vertical-align-middle">Dimensión  {{ dimensiones[2] }}</span>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="content">
+                            <div class="dimension-title">
+                                <span class="general-dimension-title">
+                                    DIMENSIÓN {{ dimensiones[2]| uppercase }}
+                                </span>
+                            </div>
+                            <ng-container *ngTemplateOutlet="cuadroPersonal"></ng-container>
+                        </ng-template>
+                    </p-accordionTab>
+                </p-accordion>
+            </div>
+
+                      
+              
+            
+            <ng-template #cuadroAcademico>
+                <div>
+                    <div style="display: flex;">
+                        <div style="flex: 1;">
+                            <div class="dimension-title">
+                                <span class="title-field">
+                                    Descripción de la actividad
+                                </span>
+                            </div>
+                            <div class="card flex justify-content-center ">
+                                <span>
+                                    <textarea id="float-input" rows="5" cols="50"   pInputTextarea
+                                        placeholder="Escriba situaciones que pudo identificar en el tutorado(a)."
+                                        [formControlName] = "formControlNames[4]
+                                        " s></textarea>
+                                </span>
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="dimension-title" style="flex: 1;">
+                                <span>Referencia</span>
+                            </div>
+                            <div class="card flex justify-content-center">
+                                <span>
+                                    <textarea id="float-input" rows="5" cols="50" pInputTextarea
+                                        placeholder="Escriba posibles recomendacion para la situacion del tutorado(a)."
+                                        [formControlName] = "formControlNames[5]"></textarea>
+                                </span>
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="dimension-title" style="flex: 1;">
+                                <span>Observación</span>
+                            </div>
+                            <div class="card flex justify-content-center">
+                                <span>
+                                    <textarea id="float-input" rows="5" cols="50" pInputTextarea
+                                        placeholder="Escriba aspectos importante que destaco el tutorado(a)."
+                                        [formControlName] = "formControlNames[6]"></textarea>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            
+            <ng-template #cuadroProfesional>
+                <div>
+                    <div style="display: flex;">
+                        <div style="flex: 1;">
+                            <div class="dimension-title">
+                                <span class="title-field">
+                                    Descripción de la actividad
+                                </span>
+                            </div>
+                            <div class="card flex justify-content-center">
+                                <span>
+                                    <textarea id="float-input" rows="5" cols="50" pInputTextarea
+                                        placeholder="Escriba situaciones que pudo identificar en el tutorado(a)."
+                                        [formControlName] = "formControlNames[7]"></textarea>
+                                </span>
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="dimension-title" style="flex: 1;">
+                                <span>Referencia</span>
+                            </div>
+                            <div class="card flex justify-content-center">
+                                <span>
+                                    <textarea id="float-input" rows="5" cols="50" pInputTextarea
+                                        placeholder="Escriba posibles recomendacion para la situacion del tutorado(a)."
+                                        [formControlName] = "formControlNames[8]"></textarea>
+                                </span>
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="dimension-title" style="flex: 1;">
+                                <span>Observación</span>
+                            </div>
+                            <div class="card flex justify-content-center">
+                                <span>
+                                    <textarea id="float-input" rows="5" cols="50" pInputTextarea
+                                        placeholder="Escriba aspectos importante que destaco el tutorado(a)."
+                                        [formControlName] = "formControlNames[9]"></textarea>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template #cuadroPersonal>
+                <div>
+                    <div style="display: flex;">
+                        <div style="flex: 1;">
+                            <div class="dimension-title">
+                                <span class="title-field">
+                                    Descripción de la actividad
+                                </span>
+                            </div>
+                            <div class="card flex justify-content-center">
+                                <span>
+                                    <textarea id="float-input" rows="5" cols="50" pInputTextarea
+                                        placeholder="Escriba situaciones que pudo identificar en el tutorado(a)."
+                                        [formControlName] = "formControlNames[10]"></textarea>
+                                </span>
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="dimension-title" style="flex: 1;">
+                                <span>Referencia</span>
+                            </div>
+                            <div class="card flex justify-content-center">
+                                <span>
+                                    <textarea id="float-input" rows="5" cols="50" pInputTextarea
+                                        placeholder="Escriba posibles recomendacion para la situacion del tutorado(a)."
+                                        [formControlName] = "formControlNames[11]"></textarea>
+                                </span>
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="dimension-title" style="flex: 1;">
+                                <span>Observación</span>
+                            </div>
+                            <div class="card flex justify-content-center">
+                                <span>
+                                    <textarea id="float-input" rows="5" cols="50" pInputTextarea
+                                        placeholder="Escriba aspectos importante que destaco el tutorado(a)."
+                                        [formControlName] = "formControlNames[12]"></textarea>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            
+        </div>
+        <br>
+
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+              <button pButton pRipple                   
+                      icon="pi pi-arrow-left"
+                      iconPos="left"
+                      [style]="{ 'background-color': '#E3B02E', 'border': 'none','color': 'black'}"
+                      (click)="retroceder()"
+              >
+              </button>
+            </div>
+            <div>
+              <button pButton pRipple 
+                      label="Guardar" 
+                      [style]="{ 'background-color': '#E3B02E', 'border': 'none','color': 'black'}"
+              >
+              </button>
+            </div>
+        </div>
+          
+    </form>    
+    
+</div>
+<p-toast></p-toast>

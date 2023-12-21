@@ -1,0 +1,100 @@
+<h4 class="m-0 pl-3 pt-1" style="background: #DFEAF4;color:#A7A7A7;">Complete aspectos generales de la sesión de tutoría:</h4>
+
+
+<form [formGroup]="formSesionTutoriaObligatoria"
+>
+
+    <div class="flex flex-wrap" style="background: #DFEAF4;">
+        <!-- LEFT -->    
+        <div style="flex: 1;" class="columnInput">            
+            <div class="flex justify-content-start align-items-center">
+                <div style="flex: 1;">
+                    <label for="inputField" style="width: 20%;">Semestre:</label>
+                </div>
+    
+                <div style="flex: 2;">
+                    <input type="text" pInputText 
+                        style="width: 80%;"
+                        [placeholder]="semestreValue"
+                        disabled="true">
+                    
+                </div>           
+                
+            </div>
+            
+            <br>
+    
+            <div class="flex justify-content-start align-items-center">
+                <div style="flex: 1;">
+                  <label for="inputField" style="width: 20%;">Hora inicio:</label>
+                </div>
+                <div style="flex: 2;" >
+                    <p-calendar  id="horaInicio" 
+                                type="horaInicio" 
+                                name="horaInicio" 
+                                formControlName="horaInicio"  
+                                [showTime]="true" 
+                                [showSeconds]="true" 
+                                [timeOnly]="true"  
+                                [style]="{'width': '80%'}" >
+                    </p-calendar>
+                    <br>
+                </div>
+            </div>
+    
+            <br>
+    
+            <div class="flex justify-content-start align-items-center">
+                <div style="flex: 1;">
+                    <label for="inputField" style="width: 20%;">Tipo de reunión:</label>
+                </div>
+                <div style="flex: 2; "  >
+                    <p-dropdown id="selectedTipoReunion" 
+                                type="selectedTipoReunion" 
+                                name="selectedTipoReunion" 
+                                formControlName="selectedTipoReunion" 
+                                [options]="tiposReunion"
+                                optionLabel="name" 
+                                [style]="{'width': '80%'}">
+                    </p-dropdown>
+                </div>
+            </div>               
+        </div>
+    
+        <!-- RIGTH -->
+        <div style="flex: 1;" class="columnInput">
+            
+            <div class="flex justify-content-start align-items-center">
+                <div style="flex: 1;">
+                    <label for="inputField" style="width: 25%;">Fecha:</label>
+                </div>
+                <div style="flex: 2;">
+                    <p-calendar id="fecha" 
+                        type="fecha" 
+                        name="fecha" 
+                        formControlName="fecha" 
+                        [showIcon]="true"  >
+                    </p-calendar>
+                </div>
+            </div>
+            <br>
+            <div class="flex justify-content-start align-items-center">
+                <div style="flex: 1;" >
+                    <label for="inputField" style="width: 25%;">Intervalo de duración:</label>
+                  </div>
+                  <div style="flex: 2;" >
+                        <p-inputNumber  id="intervaloDuracion" 
+                                        type="intervaloDuracion" 
+                                        name="intervaloDuracion" 
+                                        formControlName="intervaloDuracion" 
+                                        [showButtons]="true" 
+                                        inputId="integeronly" 
+                                        suffix=" min"   >                  
+                        </p-inputNumber>
+                  </div>
+            </div>           
+        </div>    
+    </div>
+</form>
+
+<br>

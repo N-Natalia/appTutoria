@@ -1,0 +1,16 @@
+
+<div class="header p-d-flex p-jc-between blue-background">
+  <div class="title p-flex-grow-1 p-text-center">
+    <!-- <span style="font-weight: bold; margin-left: 9cm;">Bienvenido(a), {{actor}}</span> -->
+    <span style="font-weight: bold; margin-left: 3cm;">Bienvenido(a), {{actor}}</span>
+  </div>
+  <div class="actions p-d-flex p-ai-center p-jc-center">
+    <p-button label="Cerrar sesión" 
+              icon="pi pi-sign-out" 
+              iconPos="right" 
+              class="custom-button"
+              [style]="{ 'background-color': '#E3B02E', 'border': 'none','color': 'black'}"
+              (onClick)="logOut()">
+    </p-button>
+  </div>
+</div>

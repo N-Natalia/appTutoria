@@ -1,0 +1,228 @@
+<app-home></app-home>
+<div class="vista" style="position: relative; z-index: 0;">
+    <!-- <cuadro de dialogo -->
+    <div *ngIf="Tutorado ">
+        <div class="card">
+            <p-toast></p-toast>
+            <p-confirmDialog #cd [style]="{width: '45vw'}" [closable]="true" [dismissableMask]="true" >
+                <ng-template pTemplate="header">
+                    
+                    <div >
+                        <h1>Detalle de reserva</h1>              
+                        <div class="flex">
+                            <label class="font-bold flex align-items-center justify-content-center ">Ver historial:</label>
+                            <div class="card flex justify-content-center">
+                                <p-button (click)="showDialog()" icon="pi pi-book" label="" [style]="{'margin-left': '40px'}"></p-button>
+                                <p-dialog header="Historial" [modal]="true" [(visible)]="visible" [style]="{width: '50vw'}" [maximizable]="true">
+                                    <app-tabla-historial-tutorado [tutoradoObj]="Tutorado" ></app-tabla-historial-tutorado>
+                                </p-dialog>
+                            </div>                            
+                        </div>                    
+                                              
+                    </div>
+                    
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    
+                    <div class="text-center">
+                        <div class="font-bold"style="margin-left: 15px;">Confirmar reserva:</div>
+                        <div style="height: 5px;"></div>
+                        <button style="margin-left: 20px;" type="button" pButton icon="pi pi-times" label=" " class="p-button-danger" (click)="cd.reject()"></button>
+                        <button  style="margin-left: 20px;"type="button" pButton icon="pi pi-check" label=" " class="p-button-success" (click)="cd.accept()"></button>
+
+                    </div>                    
+                    <!-- Espacio de separación -->
+                    <div style="height: 20px;"></div>
+                    
+                    <button style="margin-left: 40px;"  type="button" pButton label="Atender reserva" (click)="atender(Tutorado.code!)"></button>
+                    
+                </ng-template>
+            </p-confirmDialog>
+        
+        </div>
+
+    </div>
+    
+    <!-- Cuadro de dialog end -->
+
+  <div class="text-center">
+    <h1>Estado de reservas voluntarias</h1>
+  </div>
+  <div class="tabla flex align-items-center justify-content-center">
+    <table>
+      <thead>
+        <tr class="yellow-background">
+          <th class="bg-white"></th>
+          <ng-container *ngFor="let dia of diasSemana; let i = index">
+            <th>
+              <div class="py-2">
+                {{ dia }}
+              </div>
+            </th>
+          </ng-container>
+        </tr>
+        <tr>
+          <th class="yellow-background">
+            <div class="py-2">Hora</div>
+          </th>
+          <ng-container *ngFor="let date of datosParaMostrar">
+            <th class="yellow-background">{{ date }}</th>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let horario of horarios">
+          <tr>
+            <td
+              class="font-medium lowercase yellow-background xl:w-12rem lg:w-10rem md:w-9rem sm:w-8rem"
+            >
+              <div class="px-3">
+                {{ formatoTiempoConDuracion(horario.Hora, horario.Duracion) }}
+              </div>
+            </td>
+            <td>
+              <button
+                type="button"
+                pButton
+                pRipple
+                [ngClass]="{
+                  'bg-green': estadoGreen('Lunes', horario.Hora),
+                  'bg-gray': !esDisponible('Lunes', horario.Hora),
+                  'bg-sky': estadoSky('Lunes', horario.Hora),
+                  'bg-blue': estadoBlue('Lunes', horario.Hora)
+                }"
+                class="data-cell block custom-bottom"
+                [disabled]="buttomDesabilitado('Lunes', horario.Hora, 0)"
+                (click)="confirm1('Lunes', horario.Hora, horario.Duracion)"
+              >
+                <div class="button-content">
+                  <div class="text-center">
+                    {{ textoButtom("Lunes", horario.Hora) }}
+                  </div>
+                </div>
+              </button>
+            </td>
+
+            <td>
+              <button
+                type="button"
+                pButton
+                pRipple
+                [ngClass]="{
+                  'bg-green': estadoGreen('Martes', horario.Hora),
+                  'bg-gray': !esDisponible('Martes', horario.Hora),
+                  'bg-sky': estadoSky('Martes', horario.Hora),
+                  'bg-blue': estadoBlue('Martes', horario.Hora)
+                }"
+                class="data-cell block custom-bottom"
+                [disabled]="buttomDesabilitado('Martes', horario.Hora, 1)"
+                (click)="confirm1('Martes', horario.Hora, horario.Duracion)"
+              >
+                <div class="button-content">
+                  <div class="text-center">
+                    {{ textoButtom("Martes", horario.Hora) }}
+                  </div>
+                </div>
+              </button>
+            </td>
+
+            <td>
+              <button
+                type="button"
+                pButton
+                pRipple
+                [ngClass]="{
+                  'bg-green': estadoGreen('Miércoles', horario.Hora),
+                  'bg-gray': !esDisponible('Miércoles', horario.Hora),
+                  'bg-sky': estadoSky('Miércoles', horario.Hora),
+                  'bg-blue': estadoBlue('Miércoles', horario.Hora)
+                }"
+                class="data-cell block custom-bottom"
+                [disabled]="buttomDesabilitado('Miércoles', horario.Hora, 2)"
+                (click)="confirm1('Miércoles', horario.Hora, horario.Duracion)"
+              >
+                <div class="button-content">
+                  <div class="text-center">
+                    {{ textoButtom("Miércoles", horario.Hora) }}
+                  </div>
+                </div>
+              </button>
+            </td>
+
+            <td>
+              <button
+                type="button"
+                pButton
+                pRipple
+                [ngClass]="{
+                  'bg-green': estadoGreen('Jueves', horario.Hora),
+                  'bg-gray': !esDisponible('Jueves', horario.Hora),
+                  'bg-sky': estadoSky('Jueves', horario.Hora),
+                  'bg-blue': estadoBlue('Jueves', horario.Hora)
+                }"
+                class="data-cell block custom-bottom"
+                [disabled]="buttomDesabilitado('Jueves', horario.Hora, 3)"
+                (click)="confirm1('Jueves', horario.Hora, horario.Duracion)"
+              >
+                <div class="button-content">
+                  <div class="text-center">
+                    {{ textoButtom("Jueves", horario.Hora) }}
+                  </div>
+                </div>
+              </button>
+            </td>
+
+            <td>
+              <button
+                type="button"
+                pButton
+                pRipple
+                [ngClass]="{
+                  'bg-green': estadoGreen('Viernes', horario.Hora),
+                  'bg-gray': !esDisponible('Viernes', horario.Hora),
+                  'bg-sky': estadoSky('Viernes', horario.Hora),
+                  'bg-blue': estadoBlue('Viernes', horario.Hora)
+                }"
+                class="data-cell block custom-bottom"
+                [disabled]="buttomDesabilitado('Viernes', horario.Hora, 4)"
+                (click)="confirm1('Viernes', horario.Hora, horario.Duracion)"
+              >
+                <div class="button-content">
+                  <div class="text-center">
+                    {{ textoButtom("Viernes", horario.Hora) }}
+                  </div>
+                </div>
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="text-center">
+    <p-button
+      type="button"
+      icon="pi pi-chevron-left"
+      (click)="retrocederSemana()"
+      styleClass="p-button-text"
+      label="Atrás"
+      [disabled]="posicionFechaMostrar == 0"
+    >
+    </p-button>
+    <p-button
+      type="button"
+      icon="pi pi-chevron-right"
+      iconPos="right"
+      (click)="avanzarSemana()"
+      styleClass="p-button-text"
+      label="Siguiente"
+      [disabled]="posicionFechaMostrar == semanasSiguientes"
+    >
+    </p-button>
+  </div>
+  <br>
+  <app-leyenda-estado-reserva></app-leyenda-estado-reserva>
+</div>
+
+<p-toast></p-toast>

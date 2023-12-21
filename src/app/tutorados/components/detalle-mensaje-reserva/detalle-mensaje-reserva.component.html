@@ -1,0 +1,14 @@
+
+<div class="card">
+  <p-toast></p-toast>
+  <p-confirmDialog #cd [style]="{width: '50vw'}" [closable]="true" [dismissableMask]="true" >
+      <ng-template pTemplate="header">
+          <h1>Detalle de reserva</h1>
+      </ng-template>
+      <ng-template pTemplate="footer">
+          <button type="button" pButton icon="pi pi-times" label="Cancelar" class="p-button-danger" (click)="cd.reject()"></button>
+          <button type="button" pButton icon="pi pi-check" label="Confirmar" class="p-button-success" (click)="cd.accept()"></button>
+      </ng-template>
+  </p-confirmDialog>
+
+</div>

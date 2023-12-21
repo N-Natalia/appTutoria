@@ -1,0 +1,86 @@
+
+<div class="grid h-screen align-items-center justify-content-center custom-background">
+    <div id="contenedorcentrado" class="z-2">
+        <div id="izquierdo">
+            <div class="titulo">
+                Bienvenido(a)
+            </div>
+            <hr>
+            <div class="pie-form text-center">
+                <a href="auth/forgotPassword">¿Olvidaste tu contraseña?</a>
+                <hr>
+                <a href="home">« Volver</a>
+            </div>
+        </div>
+
+        <div id="login">
+            <form   id="loginform" 
+                    autocomplete="off" 
+                    [formGroup]="miFormulario" 
+                    (ngSubmit)="onlogin()">
+
+                <div>
+
+                    <label  for="code" 
+                            class="block text-900 font-medium mb-2">
+                        Código
+                    </label>
+
+                    <div
+                        [class.error]="miFormulario.controls['code'].dirty && miFormulario.hasError('required','code')">
+                        <input  id="code" 
+                                type="code" 
+                                name="code" 
+                                formControlName="code"
+                                placeholder="Ingrese su código" 
+                                pInputText class="w-full mb-1"
+                                style="border: 1px solid #ccc; padding: 5px;">
+                    </div>
+
+                    <small *ngIf="miFormulario.controls['code'].dirty && miFormulario.hasError('required','code')"
+                            style="color: red;">*El código es requerido
+                    </small>
+
+                </div>
+                <div>
+                    <label  for="password" 
+                            class="block text-900 font-medium mb-2">Contraseña
+                    </label>
+
+                    <div
+                        [class.error]="miFormulario.controls['password'].dirty && miFormulario.hasError('required','password')">
+                        <p-password formControlName="password" 
+                                    id="password1" 
+                                    type="password" 
+                                    class="w-full"
+                                    [feedback]="false" 
+                                    placeholder="Ingrese su contraseña" 
+                                    styleClass="p-password p-component p-inputwrapper p-input-icon-right" 
+                                    [style]=" {'width':'100%'}"
+                                    [inputStyle]=" {'width':'100%'}" 
+                                    [toggleMask]="true">
+                        </p-password>
+                    </div>
+
+                    <small
+                        *ngIf="miFormulario.controls['password'].dirty && miFormulario.hasError('required','password')"
+                        style="color: red; margin-top:1px">*La contraseña es requerida
+                    </small>
+                </div>
+
+                <div class="pt-2 
+                            d-flex 
+                            justify-content-center">
+                    <button pButton pRipple 
+                            label="Iniciar sesión" 
+                            icon="pi pi-user" 
+                            iconPos="right" 
+                            class="w-full"
+                            [loading]="loading">
+                    </button>
+                </div>
+            </form>
+        </div>        
+    </div>
+</div>
+<p-toast></p-toast>

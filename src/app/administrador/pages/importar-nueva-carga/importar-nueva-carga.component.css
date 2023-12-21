@@ -1,0 +1,24 @@
+.vista{
+    margin-top: 80px;
+    margin-left: 110px;
+    margin-right: 40px;
+    margin-bottom: 40px;
+  }
+
+.sub-titulo{
+    background-color: rgb(167, 196, 228);
+    padding: 5px;
+    font-weight: 600;
+}
+::ng-deep .p-fileupload .p-button.p-fileupload-upload {
+    width: 888px !important;  /* Cambia esto al ancho que desees */
+}
+
+::ng-deep .p-fileupload .p-button {
+   
+    background-color: #E3B02E;  
+    color: black;
+    border: none;
+    
+}
+

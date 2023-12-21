@@ -1,0 +1,25 @@
+<div class="card">
+    <p-toast></p-toast>
+    <p-confirmDialog #cd key="dialogo1" [style]="{width: '50vw'}" [closable]="true" [dismissableMask]="true" >
+        <ng-template pTemplate="header">
+            <div>
+                <h1>Detalle de reserva</h1>
+                <div class="flex">
+                    <label class="font-bold flex align-items-center justify-content-center ">Ver historial:</label>
+                    <div class="card flex justify-content-center">
+                        <p-button (click)="showDialog()" icon="pi pi-book" label="" [style]="{'margin-left': '40px'}"></p-button>
+                        <p-dialog header="Historial" [modal]="true" [(visible)]="visible" [style]="{width: '50vw'}" [maximizable]="true">
+                            <app-tabla-historial-tutorado [tutoradoObj]="tutoradoObj" ></app-tabla-historial-tutorado>
+                        </p-dialog>
+                    </div>                            
+                </div>
+            </div>
+            
+        </ng-template>
+        <ng-template pTemplate="footer">
+            
+            <button type="button" pButton icon="pi pi-check" label="Ok" class="p-button-success" (click)="cd.accept()"></button>
+        </ng-template>
+    </p-confirmDialog>
+  
+  </div>

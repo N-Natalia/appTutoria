@@ -1,0 +1,21 @@
+
+
+<div >  
+    
+    <div 
+        style=" display: flex; ">
+
+        <div class="data-fields" style="flex: 1; ">
+            <strong class="mr-1">Fecha de atención del bloque:</strong> {{ fecha }}
+        </div>
+        <div class="data-fields" style="flex: 1; ">
+            <strong class="mr-1">Día:</strong> {{ diaOfFecha(fecha!)| titlecase}}
+        </div>
+        <div class="data-fields" style="flex: 1;">
+            <strong class="mr-1">Horario:</strong> {{ calcularHoraFinal(hora, duracion, totalTutorados) }}
+            
+        </div>   
+
+    </div>
+
+</div>

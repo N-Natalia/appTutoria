@@ -1,0 +1,34 @@
+
+
+
+
+<div >
+    <br>
+    <h4 class="m-0 pl-2 py-1 text-black-alpha-70" style="background: #99bbdcdf;">Datos del tutorado:</h4>
+    
+    <div *ngIf="Tutorado"
+        style=" display: flex; ">
+
+        <div class="data-fields" style="flex: 1; ">
+            <strong class="mr-2">Código: </strong> {{ Tutorado.code}}
+        </div>
+
+        <div class="data-fields" style="flex: 1;">
+            <div>
+                <strong class="mr-2">Nombres: </strong>{{ Tutorado.nombres}}
+            </div>   
+            
+        </div>    
+
+        <div class="data-fields" style="flex: 1;">
+            <strong class="mr-2">Apellidos:</strong> {{ Tutorado.apPaterno}} {{Tutorado.apMaterno}}  
+            
+        </div>   
+
+        <div class="data-fields" style="flex: 1;">   
+            <strong class="mr-2">Email:</strong>  {{ Tutorado.email}}
+            
+        </div>   
+    </div>
+
+</div>

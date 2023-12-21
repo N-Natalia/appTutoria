@@ -1,0 +1,100 @@
+<div class="card flex justify-content-center">
+    <p-accordion class="w-full">
+        <p-accordionTab>
+            <ng-template pTemplate="header">
+                <div class="flex align-items-center">
+                    <i class="pi pi-calendar mr-2"></i>
+                    <span class="vertical-align-middle">Dimensión  {{ dimension1 }}</span>
+                </div>
+            </ng-template>
+            
+            <ng-template pTemplate="content">
+                <div class="dimension-title">
+                    <span class="general-dimension-title">
+                        DIMENSIÓN {{ dimension1 }}
+                    </span>
+                </div>
+
+                <ng-container *ngTemplateOutlet="cuadro"></ng-container>
+            </ng-template>
+        </p-accordionTab>
+        <p-accordionTab>
+            <ng-template pTemplate="header">
+                <div class="flex align-items-center">
+                    <i class="pi pi-search mr-2"></i>
+                    <span class="vertical-align-middle">Dimensión  {{ dimension2 }}</span>
+                    <i class="pi pi-cog ml-2 ml-2"></i>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+                <div class="dimension-title">
+                    <span class="general-dimension-title">
+                        DIMENSIÓN {{ dimension2 }}
+                    </span>
+                </div>
+                <ng-container *ngTemplateOutlet="cuadro"></ng-container>
+            </ng-template>
+        </p-accordionTab>
+        <p-accordionTab>
+            <ng-template pTemplate="header">
+                <div class="flex align-items-center">
+                    <i class="pi pi-user mr-2"></i>
+                    <span class="vertical-align-middle">Dimensión  {{ dimension3 }}</span>
+                    <i class="pi pi-cog ml-2 ml-2"></i>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+                <div class="dimension-title">
+                    <span class="general-dimension-title">
+                        DIMENSIÓN {{ dimension3 }}
+                    </span>
+                </div>
+                <ng-container *ngTemplateOutlet="cuadro"></ng-container>
+            </ng-template>
+        </p-accordionTab>
+    </p-accordion>
+</div>
+
+
+<ng-template #cuadro>
+    <div>
+        <div style="display: flex;">
+            <div style="flex: 1;">
+                <div class="dimension-title">
+                    <span class="title-field">
+                        Descripción de la actividad
+                    </span>
+                </div>
+                <div class="card flex justify-content-center">
+                    <span>
+                        <textarea id="float-input" rows="5" cols="50" pInputTextarea
+                            placeholder="Escriba situaciones que pudo identificar en el tutorado(a)."></textarea>
+                    </span>
+                </div>
+            </div>
+            <div style="flex: 1;">
+                <div class="dimension-title" style="flex: 1;">
+                    <span>Referencia</span>
+                </div>
+                <div class="card flex justify-content-center">
+                    <span>
+                        <textarea id="float-input" rows="5" cols="50" pInputTextarea
+                            placeholder="Escriba posibles recomendacion para la situacion del tutorado(a)."></textarea>
+                    </span>
+                </div>
+            </div>
+            <div style="flex: 1;">
+                <div class="dimension-title" style="flex: 1;">
+                    <span>Observación</span>
+                </div>
+                <div class="card flex justify-content-center">
+                    <span>
+                        <textarea id="float-input" rows="5" cols="50" pInputTextarea
+                            placeholder="Escriba aspectos importante que destaco el tutorado(a)."></textarea>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+

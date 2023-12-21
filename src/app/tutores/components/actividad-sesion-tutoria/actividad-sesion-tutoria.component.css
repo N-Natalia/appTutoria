@@ -1,0 +1,30 @@
+.dimension-title{
+    background-color: #E3B02E; 
+    width: 100%; height: fit-content; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;  
+    margin-bottom: 1px;
+    padding: 5px;
+}
+.general-dimension-title{
+    font-size: 18px; 
+    font-size: 2vw; 
+    color: black;
+    font-weight: bold;
+}
+.dimension-title span{
+    font-size: 18px; 
+    color: black;
+    font-size: 1.6vw;
+}
+
+textarea{
+    border-radius: 0; 
+    width: 100%; 
+    background: #BDBDBD; 
+    font-size: 2vw;
+    resize: vertical;
+}
+
+  

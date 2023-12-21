@@ -1,0 +1,303 @@
+<app-home ></app-home>
+<div class="vista" style="position: relative; z-index: 0;">
+    
+    
+    <div class="text-center">
+        <h1>Nueva sesión de tutoría obligatoria</h1>
+    </div>
+
+    <ng-container *ngIf="ProgramacionActiva.totalBloques == totalDetallesExistentes">
+        <div class="text-center">
+            <p class="bg-yellow-200">Usted completó realizar las sesiones de tutoria obligatoria.</p>
+        </div>
+    </ng-container>
+        
+    <ng-container *ngIf="!ProgramacionActiva && !detalleProgramacionActiva">
+        <h4 class="m-0 pl-2 py-1 text-black-alpha-70" style="background: #99bbdcdf;">Complete aspectos generales de la sesión de tutoría:</h4>
+
+        <form [formGroup]="formSesionTutoriaObligatoria"
+            (ngSubmit)="actualizarProgramacion()">
+        
+            <div class="flex flex-wrap" style="background: #DFEAF4;">
+                <!-- // LEFT   --> 
+                <div style="flex: 1;" class="columnInput"> 
+                    <div *ngIf="semestre">
+                        <div class="flex justify-content-start align-items-center">
+                            <div style="flex: 1;">
+                                <label for="inputField" style="width: 20%;">Semestre:</label>
+                            </div>
+                
+                            <div style="flex: 2;">
+                                <input type="text" pInputText 
+                                    style="width: 80%;"
+                                    [placeholder]="semestre.denominacionSemestre"
+                                    disabled="true">
+                                
+                            </div>           
+                            
+                        </div>
+
+                    </div>           
+                    
+                    <br>
+            
+                    <div class="flex justify-content-start align-items-center">
+                        <div style="flex: 1;">
+                            <label for="inputField" style="width: 20%;">Total bloques de atención:</label>
+                        </div>
+                        <div style="flex: 2; "  >
+                            <p-dropdown id="totalBloques" 
+                                        type="number" 
+                                        name="totalBloques" 
+                                        formControlName="totalBloques" 
+                                        [options]="opcionsTotalBloques"
+                                        optionLabel="value" 
+                                        [style]="{'width': '80%'}"
+                                        [placeholder]="formSesionTutoriaObligatoria.value.totalBloques">
+                            </p-dropdown>
+                        </div>
+                    </div>  
+                                
+                </div>
+
+            
+                <!-- //RIGTH  -->
+                <div style="flex: 1;" class="columnInput">
+                    
+                    <div class="flex justify-content-start align-items-center">
+                        <div style="flex: 1;" >
+                            <label for="inputField" style="width: 25%;">Tiempo atención por tutorado:</label>
+                            </div>
+                            <div style="flex: 2;" >
+                                <p-inputNumber  id="intervaloDuracion" 
+                                                type="intervaloDuracion" 
+                                                name="intervaloDuracion" 
+                                                formControlName="intervaloDuracion" 
+                                                [showButtons]="true" 
+                                                inputId="integeronly" 
+                                                suffix=" min"
+                                                [min]="10"
+                                                [max]="30"
+                                                [step]="5"
+                                                [ngStyle]="{'width': '100%'}"  >                  
+                                </p-inputNumber>
+                            </div>
+                    </div> 
+                            
+                </div>    
+            </div>
+            <br>
+            
+        </form>
+        <p-button label="Guardar" 
+            [style]="{ 'background-color': '#E3B02E', 'border': 'none','color': 'black'}" 
+            (onClick)="actualizarProgramacion()"
+            [disabled]="!formSesionTutoriaObligatoria.valid"
+            class="flex justify-content-end">
+        </p-button>
+    </ng-container>
+
+    <ng-container *ngIf="ProgramacionActiva && (!detalleProgramacionActiva) && (ProgramacionActiva.totalBloques != totalDetallesExistentes)">
+        <!-- //Contenido cuando ProgramacionActiva no es null y detalleProgramacionActiva no es null  -->
+        <div *ngIf="semestre">
+            <app-datos-programacion-ro [FechaInicio]="formatearUTCFecha(ProgramacionActiva.fechaInicio!.toISOString())" [FechaFin]="formatearUTCFecha(ProgramacionActiva.fechaFin!.toISOString())" [duracion]="ProgramacionActiva.duracion!" [totalTutorados]="cantidadTutorados!" [semestre]="semestre.denominacionSemestre" [tipoReunion]="ProgramacionActiva.tipo!" ></app-datos-programacion-ro>
+
+        </div>
+
+
+        <div *ngIf="totalDetallesExistentes==0 ">
+            <h4 class="m-0 pl-2 py-1 text-black-alpha-70" style="background: #99bbdcdf;">Actualizar aspectos generales de la sesión de tutoría:</h4>
+            <h6 class="m-0 pl-3 pt-1 pb-2" style="background: #DFEAF4;color:#19141499;">Solo actualize, si los datos mostrados no son los adecuados.</h6>
+
+            <div style="margin-top: 1px;">
+                <form [formGroup]="formSesionTutoriaObligatoria"
+                (ngSubmit)="actualizarProgramacion()">
+            
+                    <div class="flex flex-wrap" style="background: #DFEAF4;">
+                        <!-- // LEFT   --> 
+                        <div style="flex: 1;" class="columnInput"> 
+                            
+                            <div class="flex justify-content-start align-items-center">
+                                <div style="flex: 1;">
+                                    <label for="inputField" style="width: 20%;">Total bloques de atención:</label>
+                                </div>
+                                <div style="flex: 2; "  >
+                                    <p-dropdown id="totalBloques" 
+                                                type="number" 
+                                                name="totalBloques" 
+                                                formControlName="totalBloques" 
+                                                [options]="opcionsTotalBloques"
+                                                optionLabel="value" 
+                                                [style]="{'width': '80%'}"
+                                                [placeholder]="formSesionTutoriaObligatoria.value.totalBloques">
+                                    </p-dropdown>
+                                </div>
+                            </div>  
+                                        
+                        </div>
+                    
+                        <!-- //RIGTH  -->
+                        <div style="flex: 1;" class="columnInput">
+                            
+                            <div class="flex justify-content-start align-items-center">
+                                    <div style="flex: 1;" >
+                                    <label for="inputField" style="width: 25%;">Tiempo atención por tutorado:</label>
+                                    </div>
+                                    <div style="flex: 2;" >
+                                        <p-inputNumber  id="intervaloDuracion" 
+                                                        type="intervaloDuracion" 
+                                                        name="intervaloDuracion" 
+                                                        formControlName="intervaloDuracion" 
+                                                        [showButtons]="true" 
+                                                        inputId="integeronly" 
+                                                        suffix=" min"
+                                                        [min]="10"
+                                                        [max]="30"
+                                                        [step]="5"
+                                                        [ngStyle]="{'width': '100%'}"  >                  
+                                        </p-inputNumber>
+                                    </div>
+                            </div>
+                            
+                        </div> 
+                        
+                    </div>
+                </form>
+
+            </div>
+            <div class="flex align-items-center pr-7 pl-3 pb-2" style="background: #DFEAF4;">
+                <p-button label="Guardar" 
+                        [style]="{ 'background-color': '#E3B02E', 'border': 'none','color': 'black'}" 
+                        (onClick)="actualizarProgramacion()"
+                        [disabled]="!formSesionTutoriaObligatoria.valid"
+                        >
+                </p-button>
+
+            </div>
+
+            
+        </div>
+
+        <div >
+            <div class="m-0 pl-3 pt-2 pb-2" style="border: 1px solid white; background: #DFEAF4;">
+                <strong>Total bloques de atención:  " {{ProgramacionActiva.totalBloques}} "</strong>
+            </div>
+            
+            
+            <h4 class="m-0 pl-2 py-1 text-black-alpha-70" style="background: #99bbdcdf;">Complete aspectos generales de la programación del "BLOQUE {{totalDetallesExistentes+1}}":</h4>
+    
+            <form [formGroup]="formDetalleSesionTutoriaObligatoria"
+                (ngSubmit)="onSubmit()">
+            
+                <div class="flex flex-wrap" style="background: #DFEAF4;">
+                    <!-- // LEFT -->    
+                    <div style="flex: 1;" class="columnInput"> 
+                        
+                
+                        <div class="flex justify-content-start align-items-center">
+                            <div style="flex: 1;">
+                                <label for="inputField" style="width: 25%;">Fecha:</label>
+                            </div>
+                            <div style="flex: 2;">
+                                <div >
+                                    
+                                    <p-calendar  
+                                        formControlName="fecha" 
+                                        [showIcon]="true"
+                                        dateFormat="dd/mm/yy"
+                                        placeholder="dd/mm/yy"
+                                        class="calendar-float"
+                                        [minDate]="start" 
+                                        [maxDate]="end"
+                        
+                                        >
+                                    </p-calendar>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                
+                    <!-- //RIGTH -->
+                    <div style="flex: 1;" class="columnInput">
+                        
+                        <div class="flex justify-content-start align-items-center">
+                            <div style="flex: 1;">
+                                <label for="inputField" style="width: 20%;">Hora inicio:</label>
+                            </div>
+                            <div style="flex: 2;" >
+                                <p-calendar  id="horaInicio" 
+                                            type="horaInicio" 
+                                            name="horaInicio" 
+                                            formControlName="horaInicio"  
+                                            [showTime]="true" 
+                                            [showSeconds]="true" 
+                                            [timeOnly]="true"  
+                                            [style]="{'width': '80%'}"
+                                            placeholder="00:00:00" >
+                                </p-calendar>
+                                <br>
+                            </div>
+                        </div>
+                                
+                    </div>    
+                </div>
+                
+                <br>
+                <div class="flex justify-content-between">
+                    <button pButton pRipple 
+                            label="Vista previa" 
+                            [icon]="mostrarVistaPrevia ? 'pi pi-eye' : 'pi pi-eye-slash'"
+                            iconPos="right" 
+                            [style]="{ 'background-color': '#E3B02E', 'border': 'none','color': 'black'}"
+                            [disabled]="!formDetalleSesionTutoriaObligatoria.valid"
+                            >
+                    </button>
+    
+                </div> 
+            </form>
+            <div class="vistaPrevia" *ngIf="mostrarVistaPrevia" style="max-height: 400px; overflow-y: auto;">
+                <ng-container *ngTemplateOutlet="vistaPreviaTemplate"></ng-container>
+            </div>
+
+        </div>
+        
+        
+
+    </ng-container>
+
+    <ng-template #vistaPreviaTemplate>
+        <br>
+        <app-cuadro-vista-previa-reserva-obligatoria [cantidadFilasTabla]="cantidadTutorados" [Duracion]="vistaPreviaData.intervaloDuracion" [HoraInicio]="vistaPreviaData.horaInicio"></app-cuadro-vista-previa-reserva-obligatoria>
+        <br>
+        
+        <p-button label="Guardar" 
+            [style]="{ 'background-color': '#E3B02E', 'border': 'none','color': 'black'}" 
+            (onClick)="guardarDetalle()"
+            [disabled]="!formDetalleSesionTutoriaObligatoria.valid"
+            class="flex justify-content-end">
+        </p-button>
+    </ng-template>
+
+    <ng-container *ngIf="detalleProgramacionActiva ">
+        <!-- // Contenido cuando ProgramacionActiva es null --> 
+        <div class="text-center">
+            <p class="bg-yellow-200">Usted tiene un bloque de programación de tutoría académica activa. Si desea generar un nuevo bloque debe finalizar el último que registró. </p>
+            <div class="pie-form text-center">
+                <p>En la siguiente vista:</p>
+                <button pButton pRipple 
+                        label="Estado reservas tutoría obligatoria" 
+                        icon="pi pi-arrow-circle-right"
+                        iconPos="left"
+                        routerLink="/tutores/estadoReservasObligatorias"
+                        >
+                </button>              
+            </div>
+        </div>
+    </ng-container>
+    
+</div>   
+
+
+<p-toast></p-toast>
+

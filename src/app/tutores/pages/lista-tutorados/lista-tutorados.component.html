@@ -1,0 +1,34 @@
+<app-home ></app-home>
+<div class="vista" style="position: relative; z-index: 0;">
+    
+    <h1 style="display: flex; justify-content: center;">Tutorados</h1>
+    <div class="card">
+        <p-toast></p-toast>
+        <p-table [value]="tutorados" [scrollable]="true" scrollHeight="600px"
+        [tableStyle]="{'min-width': '50rem'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="background-color:#E3B02E;">Código</th>
+                    <th style="background-color:#E3B02E;">Nombres</th>
+                    <th style="background-color:#E3B02E;">Apellidos</th>
+                    <th style="background-color:#E3B02E;">Email Address</th>
+                    <th class="text-center" style="background-color:#E3B02E;">Info General</th>
+                    <th class="text-center" style="background-color:#E3B02E;">Historial</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-tutorado>
+                <tr>
+                    <td>{{tutorado.code}}</td>
+                    <td>{{tutorado.nombres}}</td>
+                    <td>{{tutorado.apPaterno}} {{tutorado.apMaterno}}</td>
+                    <td>{{tutorado.email}}</td>
+                    <td  class="text-center"><p-button icon="pi pi-user-edit" routerLink="/tutores/InfoGeneralTutorado/{{tutorado.code}}"></p-button></td>
+                    <td class="text-center"><p-button icon="pi pi-book" routerLink="/tutores/historialTutorado/{{tutorado.code}}"></p-button></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+
+</div>
+
