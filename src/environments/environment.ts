@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    baseUrl: 'http://localhost:5087/gateway'
+    baseUrl: 'http://daii.unsaac.edu.pe/gateway'
 };
